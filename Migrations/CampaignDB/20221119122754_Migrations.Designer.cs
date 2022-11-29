@@ -12,7 +12,7 @@ using nft_project.Data;
 namespace nft_project.Migrations.CampaignDB
 {
     [DbContext(typeof(CampaignDBContext))]
-    [Migration("20221008024718_Migrations")]
+    [Migration("20221119122754_Migrations")]
     partial class Migrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,18 +26,18 @@ namespace nft_project.Migrations.CampaignDB
 
             modelBuilder.Entity("nft_project.Models.Campaign", b =>
                 {
-                    b.Property<string>("camp_id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
                     b.Property<DateTime>("createAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("desc")
+                    b.Property<string>("description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("endAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("img1_url")
                         .IsRequired()
@@ -51,7 +51,11 @@ namespace nft_project.Migrations.CampaignDB
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("camp_id");
+                    b.Property<string>("zone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
 
                     b.ToTable("Campaign");
                 });

@@ -5,11 +5,11 @@ namespace nft_project.Models
     public class Campaign
     {
         [Key]
-        public string camp_id {get;set;}
+        public int id {get;set;}
         [Required]
         public string title { get; set; }
         [Required]
-        public string desciption { get; set; }
+        public string description { get; set; }
         [Required]
         public string img1_url { get; set; }
         [Required]
@@ -17,7 +17,11 @@ namespace nft_project.Models
         [Required]
         public DateTime createAt { get; set; }
         [Required]
-        public DateTime endAt { get; set; }
+        public string zone { get; set; }
 
+        public Campaign()
+        {
+            this.createAt = DateTime.Now;
+        }
     }
 }

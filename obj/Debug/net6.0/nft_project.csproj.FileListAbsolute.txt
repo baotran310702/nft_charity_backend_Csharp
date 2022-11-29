@@ -59,3 +59,8 @@ C:\Users\bestg\source\repos\nft_project\nft_project\obj\Debug\net6.0\refint\nft_
 C:\Users\bestg\source\repos\nft_project\nft_project\obj\Debug\net6.0\nft_project.pdb
 C:\Users\bestg\source\repos\nft_project\nft_project\obj\Debug\net6.0\nft_project.genruntimeconfig.cache
 C:\Users\bestg\source\repos\nft_project\nft_project\obj\Debug\net6.0\ref\nft_project.dll
+C:\Users\bestg\source\repos\nft_project\nft_project\obj\Debug\net6.0\staticwebassets\msbuild.nft_project.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\bestg\source\repos\nft_project\nft_project\obj\Debug\net6.0\staticwebassets\msbuild.build.nft_project.props
+C:\Users\bestg\source\repos\nft_project\nft_project\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.nft_project.props
+C:\Users\bestg\source\repos\nft_project\nft_project\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.nft_project.props
+C:\Users\bestg\source\repos\nft_project\nft_project\obj\Debug\net6.0\staticwebassets.pack.json

@@ -9,10 +9,10 @@ using nft_project.Data;
 
 #nullable disable
 
-namespace nft_project.Migrations
+namespace nft_project.Migrations.TransDB
 {
-    [DbContext(typeof(AuctionDBContext))]
-    [Migration("20221008024642_Migrations")]
+    [DbContext(typeof(TransDBContext))]
+    [Migration("20221119122812_Migrations")]
     partial class Migrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,25 +24,30 @@ namespace nft_project.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("nft_project.Models.Auction", b =>
+            modelBuilder.Entity("nft_project.Models.Trans", b =>
                 {
-                    b.Property<string>("nft_id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("trans_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("camp_id")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("trans_id"), 1L, 1);
+
+                    b.Property<string>("account_address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("amount")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("createAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("is_nft_trans")
+                        .HasColumnType("int");
 
-                    b.HasKey("nft_id");
+                    b.HasKey("trans_id");
 
-                    b.ToTable("Auction");
+                    b.ToTable("Trans");
                 });
 #pragma warning restore 612, 618
         }

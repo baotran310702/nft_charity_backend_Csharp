@@ -5,7 +5,7 @@ namespace nft_project.Models
     public class Trans
     {
         [Key]
-        public string trans_id { get; set; }
+        public int trans_id { get; set; }
         [Required]
         public string account_address { get; set; }
         [Required]

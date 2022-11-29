@@ -29,7 +29,7 @@ namespace nft_project.Controllers
         [HttpGet("trans/id")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById(string id)
+        public async Task<IActionResult> GetById(int id)
         {
             var result = await _context.Trans.FindAsync(id);
             return result == null ? NotFound() : Ok(result) ;
@@ -48,7 +48,7 @@ namespace nft_project.Controllers
         [HttpPut("trans")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update(string trans_id, Trans trans)
+        public async Task<IActionResult> Update(int trans_id, Trans trans)
         {
             if (trans_id != trans.trans_id) return BadRequest();
 

@@ -24,12 +24,14 @@ namespace nft_project.Migrations
 
             modelBuilder.Entity("nft_project.Models.Auction", b =>
                 {
-                    b.Property<string>("nft_id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("nft_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("camp_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("nft_id"), 1L, 1);
+
+                    b.Property<int>("camp_id")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("createAt")
                         .HasColumnType("datetime2");

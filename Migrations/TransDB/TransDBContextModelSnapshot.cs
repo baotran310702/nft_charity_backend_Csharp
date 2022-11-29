@@ -24,8 +24,11 @@ namespace nft_project.Migrations.TransDB
 
             modelBuilder.Entity("nft_project.Models.Trans", b =>
                 {
-                    b.Property<string>("trans_id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("trans_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("trans_id"), 1L, 1);
 
                     b.Property<string>("account_address")
                         .IsRequired()

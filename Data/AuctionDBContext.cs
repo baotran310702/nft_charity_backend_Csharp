@@ -14,5 +14,8 @@ namespace nft_project.Data
         {
             get; set;
         }
+
+        public DbSet<Campaign> Campaign { get; set; }
+ 
     }
 }
