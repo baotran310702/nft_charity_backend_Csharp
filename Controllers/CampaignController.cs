@@ -7,7 +7,7 @@ using nft_project.Models;
 
 namespace nft_project.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class CampaignController : ControllerBase
     {
@@ -17,7 +17,7 @@ namespace nft_project.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("camp")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IEnumerable<Campaign>> Get()
         {
@@ -26,7 +26,7 @@ namespace nft_project.Controllers
             return list_result;
         }
 
-        [HttpGet("id")]
+        [HttpGet("camp/id")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)
@@ -35,7 +35,7 @@ namespace nft_project.Controllers
             return camp == null ? NotFound() : Ok(camp);            
         }
 
-        [HttpPost]
+        [HttpPost("camp")]
         [ProducesResponseType(StatusCodes.Status201Created)]
 
         public async Task<IActionResult> Create(Campaign campaign)
@@ -46,7 +46,7 @@ namespace nft_project.Controllers
             return CreatedAtAction(nameof(GetById), new { id = campaign.id}, campaign);
         }
 
-        [HttpPut]
+        [HttpPut("camp")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Update(int id,Campaign campaign)
         {

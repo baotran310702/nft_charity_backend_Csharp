@@ -18,8 +18,10 @@ namespace nft_project.Models
         public string status { get; set; }
         [Required]
         public DateTime createAt { get; set; }
+        [Required]
+        public double endAt { get; set; }
 
- 
- 
+
+
     }
 }

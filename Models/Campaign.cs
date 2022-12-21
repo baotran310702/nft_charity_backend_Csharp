@@ -22,6 +22,7 @@ namespace nft_project.Models
         public Campaign()
         {
             this.createAt = DateTime.Now;
+            this.img2_url = "none";
         }
     }
 }

@@ -19,16 +19,16 @@ namespace nft_project.Controllers
             _context = context;
         }
 
-        [HttpGet("auction")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IEnumerable<Auction>> Get()
-        {
-            var list_result =  await _context.Auction.ToListAsync();            
+        //[HttpGet("auctionAll")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //public async Task<IEnumerable<Auction>> Get()
+        //{
+        //    var list_result =  await _context.Auction.ToListAsync();            
 
-            return list_result;
-        }
+        //    return list_result;
+        //}
 
-        [HttpGet("auctionInfor")]
+        [HttpGet("auctionAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<Object> GetAuctionInfor()
         {
@@ -37,8 +37,11 @@ namespace nft_project.Controllers
                                on a.camp_id equals c.id
                                select new
                                {
+                                   id = a.camp_id,
                                    nft_id = a.nft_id,
                                    camp_id = a.camp_id,
+                                   status = a.status,
+                                   endAt = a.endAt,
                                    title = c.title,
                                    description = c.description,
                                    img1_url = c.img1_url,
@@ -48,13 +51,27 @@ namespace nft_project.Controllers
             return auctionInfor;
         }
 
-        [HttpGet("auction/id")]
+
+        [HttpGet("auction/")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById(int id)
+        public IEnumerable<Object> GetAuctionInfor(int id)
         {
-            var camp = await _context.Auction.FindAsync(id);
-            return camp == null ? NotFound() : Ok(camp);
+            var auctionInfor = from a in _context.Auction
+                               join c in _context.Campaign
+                               on a.camp_id equals c.id
+                               where a.nft_id == id
+                               select new
+                               {
+                                   id = a.camp_id,
+                                   nft_id = a.nft_id,
+                                   camp_id = a.camp_id,
+                                   title = c.title,
+                                   description = c.description,
+                                   img1_url = c.img1_url,
+                                   img2_url = c.img2_url,
+                                   zone = c.zone,
+                               };
+            return auctionInfor;
         }
 
         [HttpPost("auction")]
@@ -64,14 +81,33 @@ namespace nft_project.Controllers
             await _context.AddAsync(auction);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetById), new { id = auction.nft_id }, auction);
+            return CreatedAtAction(nameof(GetAuctionInfor), new { id = auction.nft_id }, auction);
         }
 
         [HttpPut("auction")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> Update(Auction auction, int id)
+        public async Task<IActionResult> Update(int id)
         {
-            if (id != auction.nft_id) return BadRequest();
+
+            var auctionData = from a in _context.Auction
+                              where a.nft_id == id
+                              select new
+                              {
+                                  nft_id = a.nft_id,
+                                  camp_id = a.camp_id,
+                                  status = "Done",
+                                  createAt = a.createAt
+
+                               };
+            Auction auction = new Auction();
+
+            foreach (var data in auctionData)
+            {
+                auction.nft_id = data.nft_id;
+                auction.camp_id = data.camp_id;
+                auction.status = "Done";
+                auction.createAt = data.createAt;
+            }
 
             _context.Entry(auction).State = EntityState.Modified;
 

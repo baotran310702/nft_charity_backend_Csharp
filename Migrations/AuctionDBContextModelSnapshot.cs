@@ -36,6 +36,9 @@ namespace nft_project.Migrations
                     b.Property<DateTime>("createAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<float>("endAt")
+                        .HasColumnType("float");
+
                     b.Property<string>("status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
